@@ -64,4 +64,4 @@ jobs:
         with:
           app-name: 'fitnesswebappmagicbus'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BF3DD3E7CB394941BC2D4C0650389C4F }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_17C49D5E54764EC0BAE9B1E039A02A0E }}
