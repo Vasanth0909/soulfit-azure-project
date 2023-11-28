@@ -1,2 +1,1 @@
 Django==3.2.12
-pysqlite3==0.1.0
