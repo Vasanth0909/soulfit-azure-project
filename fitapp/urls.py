@@ -1,6 +1,7 @@
 
 from django.urls import path
 from fitapp import views
+from .views import register
 
 urlpatterns = [
     path('',views.home,name="home"),
@@ -16,5 +17,6 @@ urlpatterns = [
     path('gear/cheackout/',views.cheackout,name="cheackout"),
     path('login/',views.login,name="login"),
     path('bot/' ,views.bot,name="bot"),
-    path('signup/',views.signup, name="signup")
+    path('signup/',views.signup, name="signup"),
+    path('register/', register, name='register'),
 ]

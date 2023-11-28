@@ -4,6 +4,21 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
+# views.py
+
+from django.shortcuts import render, redirect
+from .forms import RegistrationForm,UserProfileForm
+
+def register(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('success')  # Redirect to a success page
+    else:
+        form = RegistrationForm()
+
+    return render(request, 'register.html', {'form': form})
 
 def home(request):
     return render(request,"index.html",{})
@@ -56,52 +71,47 @@ def cheackout_view(request):
 # login form
 
 
+# login view
+def user_login(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            # Add a message or handle the error
+            messages.error(request, 'Invalid login credentials')
+            return redirect('login')  # Consider redirecting to an error page or showing the login form with an error message
+            
+    return render(request, 'login.html')
+
+# signup view
 def signup(request):
-    if request.method =='POST':
-        uname=request.POST.get('username')
-        email=request.POST.get('email')
-        password1=request.POST.get('password1')
-        my_user=User.objects.create_user(uname,email,password1)
+    if request.method == 'POST':
+        uname = request.POST.get('username')
+        email = request.POST.get('email')
+        password1 = request.POST.get('password1')
+        my_user = User.objects.create_user(uname, email, password1)
         my_user.save()
         return redirect('login')
     
-    return render(request,'form-container sign-up')
+    return render(request, 'signup.html')  # Adjust the template name as needed
 
-def login(request):
-    if request.method=='POST':
-        email=request.POST.get('email')
-        password=request.POST.get('password')
-        User=authenticate(request,email=email,password=password)
-        if User is not None:
-            login(request,User)
-            return redirect('home')
-        else:
-            return redirect('login')
-            
-    return render(request,'login.html')
-        
-    
-    
-    #register
-    
-from .forms import UserProfileForm  # Import your UserProfileForm
-from .models import UserProfile
-
-
+# register view
 def register_view(request):
     if request.method == 'POST':
         form = UserProfileForm(request.POST)
         if form.is_valid():
             form.save()
-            
-            # Add a success message
             messages.success(request, 'Thank you for registering!')
-
             return redirect('home')
     else:
         form = UserProfileForm()
 
     return render(request, 'register.html', {'form': form})
+
 
 
 

@@ -50,3 +50,14 @@ class User(models.Model):
 
     def __str__(self):
         return self.username
+    
+    
+class Registration(models.Model):
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=200)
+    email = models.EmailField()
+    phone = models.CharField(max_length=15)
+    date_of_joining = models.DateField()
+    age = models.IntegerField()
+    gender = models.CharField(max_length=10)
+    program = models.CharField(max_length=20)

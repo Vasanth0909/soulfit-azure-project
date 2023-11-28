@@ -36,5 +36,6 @@ urlpatterns = [
     path('',views.cheackout ,name="cheackout"),
     path('',views.login ,name="login"),
     path('',views.bot ,name="bot"),
-    path('',views.signup, name="signup")
+    path('',views.signup, name="signup"),
+    path('',views.register,name="register")
 ]

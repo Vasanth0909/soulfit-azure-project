@@ -16,4 +16,14 @@ class cheackout(forms.ModelForm):
         model = cheackout
         fields = '__all__'
         
+# forms.py
+
+from django import forms
+from .models import Registration
+
+class RegistrationForm(forms.ModelForm):
+    class Meta:
+        model = Registration
+        fields = '__all__'
+
           
